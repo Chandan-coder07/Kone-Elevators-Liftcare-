@@ -1,0 +1,25 @@
+server:
+  port: 8084
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/liftcare}
+    username: ${DB_USER:liftcare}
+    password: ${DB_PASSWORD:liftcare}
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USER:}
+    password: ${MAIL_PASSWORD:}
+liftcare:
+  cors-origin: ${CORS_ORIGIN:http://localhost:5173}
+  notifications:
+    poll-ms: 5000
+    max-attempts: 5
+    webhook-secret: ${WEBHOOK_SECRET:change-me}
+    email: { enabled: true, from: "alerts@liftcare.local" }
+    sms:   { enabled: false, url: "${SMS_URL:}", api-key: "${SMS_API_KEY:}" }
+    push:  { enabled: false, url: "${PUSH_URL:}", api-key: "${PUSH_API_KEY:}" }
+  sync:
+    enabled: ${SYNC_ENABLED:false}          # true when this service runs on a device/cloud separate from the building DB
+    building-server-url: ${BUILDING_SERVER_URL:http://localhost:8080}
+    interval-ms: 30000
